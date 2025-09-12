@@ -32,6 +32,6 @@ public class ClassificationRecord {
 
     private double finalScore;
 
-    @OneToMany(mappedBy = "classificationRecord", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "classificationRecord", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
     private List<ClassificationDetail> classificationDetail;
 }

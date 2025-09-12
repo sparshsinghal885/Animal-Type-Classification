@@ -6,7 +6,6 @@ import com.ninja.AnimalTypeClassification.entity.User;
 import com.ninja.AnimalTypeClassification.repository.AnimalRepository;
 import com.ninja.AnimalTypeClassification.repository.UserRepository;
 import com.ninja.AnimalTypeClassification.services.AnimalService;
-import com.ninja.AnimalTypeClassification.services.UserService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
