@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface AnimalRepository extends JpaRepository<Animal, Long> {
     public Animal findByEarId(String earId);
-
+    public long count();
 }
