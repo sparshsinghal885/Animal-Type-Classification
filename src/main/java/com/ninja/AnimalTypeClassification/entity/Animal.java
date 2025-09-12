@@ -35,15 +35,12 @@ public class Animal {
     @Embedded
     private  Age age;
 
-    @ElementCollection
-    private List<String> photoUrls = new ArrayList<>();
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private User user;
 
-    // parent side (JPA domain)
+    @JsonIgnore
     @OneToMany(mappedBy = "animal", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<ClassificationRecord> classificationRecord;
 

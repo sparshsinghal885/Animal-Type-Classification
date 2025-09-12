@@ -32,7 +32,6 @@ public class AnimalServiceImpl implements AnimalService {
                 .age(animalDto.getAge())
                 .gender(animalDto.getGender())
                 .user(user)
-                .photoUrls(animalDto.getPhotoUrls())
                 .build();
 
         Animal savedAnimal = animalRepository.save(animal);

@@ -22,11 +22,9 @@ public class AnimalDto {
     @Size(max = 20, message = "Ear ID must not exceed 50 characters")
     private String earId;
 
-    @NotBlank(message = "Species is required")
     @Size(max = 20, message = "Species must not exceed 100 characters")
     private String species;
 
-    @NotBlank(message = "Breed is required")
     @Size(max = 20, message = "Breed must not exceed 100 characters")
     private String breed;
 
@@ -35,14 +33,6 @@ public class AnimalDto {
 
     @NotNull(message = "Age details are required")
     private Age age;
-
-//    @Size(max = 5, message = "A maximum of 5 photo URLs are allowed")
-//    private List<@NotBlank(message = "Photo URL cannot be blank") @Pattern(
-//            regexp = "^(http|https)://.*$",
-//            message = "Photo URL must be valid"
-//    ) String> photoUrls;
-
-    private List<String> photoUrls;
 
     private Long classificationRecordId;
 }

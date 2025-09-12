@@ -24,6 +24,7 @@ public class ClassificationDetail {
     private ClassificationRecord classificationRecord;
 
     private String traitName;
+    private String traitValue;
 
     private double score;
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ClassificationRecordService {
 
-    public ClassificationRecord createRecord(Long animalId, List<ClassificationDetailDto> detailsFromAI);
+    public ClassificationRecord createRecord(Long animalId, List<ClassificationDetailDto> detailsFromAI, List<String> imageUrls);
 
     ClassificationRecord getById(Long id);
 

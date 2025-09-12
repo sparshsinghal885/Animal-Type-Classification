@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -21,6 +22,9 @@ public class ClassificationRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ElementCollection
+    private List<String> photoUrls = new ArrayList<>();
+
     @JsonIgnore
     @ManyToOne // owning side (mapping domain)
     @JoinColumn(name = "animal_id")
@@ -32,6 +36,7 @@ public class ClassificationRecord {
 
     private double finalScore;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "classificationRecord", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
     private List<ClassificationDetail> classificationDetail;
 }

@@ -12,7 +12,9 @@ import lombok.*;
 @Builder
 public class ClassificationDetailDto {
     @NotBlank(message = "Trait name is required")
-    private String traitName;
+    private String key;
+
+    private String value;
 
     @Min(0) @Max(100)
     private double score;
