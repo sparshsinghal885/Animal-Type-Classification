@@ -10,7 +10,6 @@ import java.util.List;
 @Service
 public class AIServiceImpl implements AIService {
 
-
     // Mock implementation: normally you’d call an external AI API
     public List<ClassificationDetailDto> classifyImage(MultipartFile[] images) {
         return List.of(
