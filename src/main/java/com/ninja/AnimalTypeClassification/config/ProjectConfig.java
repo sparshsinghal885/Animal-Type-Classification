@@ -1,7 +1,6 @@
 package com.ninja.AnimalTypeClassification.config;
 
 import com.cloudinary.Cloudinary;
-import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -14,28 +13,43 @@ import java.util.Map;
 @Configuration
 public class ProjectConfig {
 
-    private final Dotenv dotenv = Dotenv.load();
+    // Cloudinary configuration using environment variables
+    @Value("${CLOUDINARY_CLOUD_NAME}")
+    private String cloudName;
+
+    @Value("${CLOUDINARY_API_KEY}")
+    private String apiKey;
+
+    @Value("${CLOUDINARY_API_SECRET}")
+    private String apiSecret;
 
     @Bean
     public Cloudinary getCloudinary() {
         Map<String, Object> config = new HashMap<>();
-        config.put("cloud_name", dotenv.get("CLOUDINARY_CLOUD_NAME"));
-        config.put("api_key", dotenv.get("CLOUDINARY_API_KEY"));
-        config.put("api_secret", dotenv.get("CLOUDINARY_API_SECRET"));
+        config.put("cloud_name", cloudName);
+        config.put("api_key", apiKey);
+        config.put("api_secret", apiSecret);
         config.put("secure", true);
         return new Cloudinary(config);
     }
 
+    // Database configuration using environment variables
+    @Value("${DB_URL}")
+    private String dbUrl;
+
+    @Value("${DB_USERNAME}")
+    private String dbUsername;
+
+    @Value("${DB_PASSWORD}")
+    private String dbPassword;
+
     @Bean
     public DataSource dataSource() {
-        Dotenv dotenv = Dotenv.load();
-
         return DataSourceBuilder.create()
-                .url(dotenv.get("DB_URL"))
-                .username(dotenv.get("DB_USERNAME"))
-                .password(dotenv.get("DB_PASSWORD"))
+                .url(dbUrl)
+                .username(dbUsername)
+                .password(dbPassword)
                 .driverClassName("org.postgresql.Driver")
                 .build();
     }
-
 }
