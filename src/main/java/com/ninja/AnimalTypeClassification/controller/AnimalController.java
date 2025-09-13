@@ -24,24 +24,6 @@ public class AnimalController {
         return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Animal>> getUserAnimals(@PathVariable Long userId){
-        List<Animal> animals = animalService.getAllAnimals(userId);
-
-        return new ResponseEntity<>(animals, HttpStatus.OK);
-    }
-
-    @GetMapping("/{earId}")
-    public ResponseEntity<Animal> getAnimalByEarId(@PathVariable String earId){
-        Animal animal = animalService.getAnimalByEarId(earId);
-
-        if(animal == null){
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }
-
-        return new ResponseEntity<>(animal, HttpStatus.FOUND);
-    }
-
     @PutMapping("/{earId}")
     public ResponseEntity<Animal> updateAnimal(@PathVariable String earId,@RequestBody AnimalDto animalDto){
         Animal animal = animalService.updateAnimal(earId, animalDto);
@@ -58,6 +40,24 @@ public class AnimalController {
         }
 
         return new ResponseEntity<>(true, HttpStatus.OK);
+    }
+
+    @GetMapping("/{earId}")
+    public ResponseEntity<Animal> getAnimalByEarId(@PathVariable String earId){
+        Animal animal = animalService.getAnimalByEarId(earId);
+
+        if(animal == null){
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(animal, HttpStatus.FOUND);
+    }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Animal>> getUserAnimals(@PathVariable Long userId){
+        List<Animal> animals = animalService.getAllAnimals(userId);
+
+        return new ResponseEntity<>(animals, HttpStatus.OK);
     }
 
 }

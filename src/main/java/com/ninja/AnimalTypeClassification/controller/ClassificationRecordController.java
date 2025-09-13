@@ -28,10 +28,8 @@ public class ClassificationRecordController {
             @PathVariable Long animalId,
             @RequestParam("images") MultipartFile[] images) {
 
-        // 1. Get AI classification results
         List<ClassificationDetailDto> details = aiService.classifyImage(images);
 
-        // 2. Upload all images to Cloudinary
         List<String> imageUrls = new ArrayList<>();
         for (MultipartFile file : images) {
             Map<String, Object> imageData = imageService.upload(file, "animal/" + animalId);
