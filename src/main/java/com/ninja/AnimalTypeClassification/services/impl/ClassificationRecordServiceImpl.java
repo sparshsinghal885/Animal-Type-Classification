@@ -21,17 +21,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class ClassificationRecordServiceImpl implements ClassificationRecordService {
 
-    private static final Set<String> cowBreeds = new HashSet<>(Arrays.asList(
-            "Alambadi", "Amritmahal", "Ayrshire", "Dangi", "Deoni", "Gir", "Guernsey",
-            "Hallikar", "Hariana", "Holstein_Friesian", "Jersey", "Kangayam", "Kankrej",
-            "Kasargod", "Kenkatha", "Kherigarh", "Khillari", "Krishna_Valley", "Malnad_gidda",
-            "Nagori", "Nimari", "Ongole", "Pulikulam", "Rathi", "Red_Dane", "Red_Sindhi",
-            "Sahiwal", "Tharparkar", "Umblachery", "Vechur"
-    ));
-    private static final Set<String> buffaloBreeds = new HashSet<>(Arrays.asList(
-            "Bargur", "Banni", "Bhadawari", "Brown_Swiss", "Jaffrabadi", "Mehsana",
-            "Murrah", "Nagpuri", "Nili_Ravi", "Surti", "Surti buffalo", "Toda"
-    ));
+
     private final AnimalRepository animalRepository;
     private final ClassificationRecordRepository recordRepository;
 
@@ -44,8 +34,9 @@ public class ClassificationRecordServiceImpl implements ClassificationRecordServ
             if ("Breed".equalsIgnoreCase(detail.getKey())) {
                 animal.setBreed(detail.getValue());    // set breed
             }
-            String species = getSpecies(animal.getBreed());
-            animal.setSpecies(species);
+            else if("Species".equalsIgnoreCase(detail.getKey())){
+                animal.setSpecies(detail.getValue());
+            }
         }
 
         ClassificationRecord record = new ClassificationRecord();
@@ -88,13 +79,5 @@ public class ClassificationRecordServiceImpl implements ClassificationRecordServ
         recordRepository.deleteById(id);
     }
 
-    public static String getSpecies(String breed) {
-        if (cowBreeds.contains(breed)) {
-            return "Cow";
-        } else if (buffaloBreeds.contains(breed)) {
-            return "Buffalo";
-        } else {
-            return "Unknown Species";
-        }
-    }
+
 }

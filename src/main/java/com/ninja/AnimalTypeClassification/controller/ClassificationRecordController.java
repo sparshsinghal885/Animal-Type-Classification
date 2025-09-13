@@ -26,6 +26,9 @@ public class ClassificationRecordController {
     @Value("${api.key}")
     private String apiKey;
 
+    @Value("${groq.api.key}")
+    private String groqApiKey;
+
     @PostMapping(value = "/classify",consumes = "multipart/form-data")
     public ResponseEntity<ClassificationRecord> classifyAnimal(
             @PathVariable Long animalId,
@@ -35,7 +38,7 @@ public class ClassificationRecordController {
         Map<String, Object> imageData = imageService.upload(image, "animal/" + animalId);
         imageUrl = (String) imageData.get("secure_url");
 
-        List<ClassificationDetailDto> details = aiService.classifyImage(imageUrl, apiKey);
+        List<ClassificationDetailDto> details = aiService.classifyImage(imageUrl, apiKey, groqApiKey);
 
         System.out.println("details = " + details);
         ClassificationRecord record = recordService.createRecord(animalId, details, imageUrl);
