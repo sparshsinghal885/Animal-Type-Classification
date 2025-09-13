@@ -15,7 +15,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/ai/classify")
+@RequestMapping("/api/ai/classify")
 public class AIImageClassification {
 
     private final AIService aiService;

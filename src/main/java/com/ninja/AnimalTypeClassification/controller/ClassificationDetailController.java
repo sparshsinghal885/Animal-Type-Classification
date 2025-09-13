@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/records/{recordId}/details")
+@RequestMapping("/api/records/{recordId}/details")
 public class ClassificationDetailController {
 
     @Autowired

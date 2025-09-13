@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/animals/{animalId}/records")
+@RequestMapping("/api/animals/{animalId}/records")
 @RequiredArgsConstructor
 public class ClassificationRecordController {
 
