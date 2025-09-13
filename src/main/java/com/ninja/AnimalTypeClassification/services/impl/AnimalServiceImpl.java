@@ -25,6 +25,7 @@ public class AnimalServiceImpl implements AnimalService {
 
         User user = userRepository.findById(userId).orElse(null);
 
+
         Animal animal = Animal.builder()
                 .earId(animalDto.getEarId())
                 .species(animalDto.getSpecies())

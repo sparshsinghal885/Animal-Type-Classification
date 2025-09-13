@@ -22,8 +22,7 @@ public class ClassificationRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ElementCollection
-    private List<String> photoUrls = new ArrayList<>();
+    private String photoUrl;
 
     @JsonIgnore
     @ManyToOne // owning side (mapping domain)

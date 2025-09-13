@@ -13,15 +13,15 @@ import java.util.Map;
 @Configuration
 public class ProjectConfig {
 
-    // Cloudinary configuration using environment variables
-    @Value("${CLOUDINARY_CLOUD_NAME}")
+    @Value("${cloudinary.cloud-name}")
     private String cloudName;
 
-    @Value("${CLOUDINARY_API_KEY}")
+    @Value("${cloudinary.api-key}")
     private String apiKey;
 
-    @Value("${CLOUDINARY_API_SECRET}")
+    @Value("${cloudinary.api-secret}")
     private String apiSecret;
+
 
     @Bean
     public Cloudinary getCloudinary() {
@@ -33,23 +33,4 @@ public class ProjectConfig {
         return new Cloudinary(config);
     }
 
-    // Database configuration using environment variables
-    @Value("${DB_URL}")
-    private String dbUrl;
-
-    @Value("${DB_USERNAME}")
-    private String dbUsername;
-
-    @Value("${DB_PASSWORD}")
-    private String dbPassword;
-
-    @Bean
-    public DataSource dataSource() {
-        return DataSourceBuilder.create()
-                .url(dbUrl)
-                .username(dbUsername)
-                .password(dbPassword)
-                .driverClassName("org.postgresql.Driver")
-                .build();
-    }
 }

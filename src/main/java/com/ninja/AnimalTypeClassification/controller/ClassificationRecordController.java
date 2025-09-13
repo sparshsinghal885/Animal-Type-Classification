@@ -6,11 +6,11 @@ import com.ninja.AnimalTypeClassification.services.AIService;
 import com.ninja.AnimalTypeClassification.services.ClassificationRecordService;
 import com.ninja.AnimalTypeClassification.services.CloudinaryImageService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,21 +23,22 @@ public class ClassificationRecordController {
     private final ClassificationRecordService recordService;
     private final CloudinaryImageService imageService;
 
+    @Value("${api.key}")
+    private String apiKey;
+
     @PostMapping(value = "/classify",consumes = "multipart/form-data")
     public ResponseEntity<ClassificationRecord> classifyAnimal(
             @PathVariable Long animalId,
-            @RequestParam("images") MultipartFile[] images) {
+            @RequestParam("image") MultipartFile image) {
 
-        List<ClassificationDetailDto> details = aiService.classifyImage(images);
+        String imageUrl;
+        Map<String, Object> imageData = imageService.upload(image, "animal/" + animalId);
+        imageUrl = (String) imageData.get("secure_url");
 
-        List<String> imageUrls = new ArrayList<>();
-        for (MultipartFile file : images) {
-            Map<String, Object> imageData = imageService.upload(file, "animal/" + animalId);
-            imageUrls.add((String) imageData.get("secure_url"));
-        }
+        List<ClassificationDetailDto> details = aiService.classifyImage(imageUrl, apiKey);
 
-        // 3. Create classification record with image URLs
-        ClassificationRecord record = recordService.createRecord(animalId, details, imageUrls);
+        System.out.println("details = " + details);
+        ClassificationRecord record = recordService.createRecord(animalId, details, imageUrl);
         return ResponseEntity.ok(record);
     }
 

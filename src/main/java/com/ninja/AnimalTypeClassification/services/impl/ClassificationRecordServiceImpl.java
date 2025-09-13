@@ -22,21 +22,19 @@ public class ClassificationRecordServiceImpl implements ClassificationRecordServ
     private final ClassificationRecordRepository recordRepository;
 
     @Transactional
-    public ClassificationRecord createRecord(Long animalId, List<ClassificationDetailDto> detailsFromAI, List<String> imageUrls) {
+    public ClassificationRecord createRecord(Long animalId, List<ClassificationDetailDto> detailsFromAI, String imageUrl) {
         Animal animal = animalRepository.findById(animalId)
                 .orElseThrow(() -> new RuntimeException("Animal not found with id: " + animalId));
 
         for (ClassificationDetailDto detail : detailsFromAI) {
-            if ("Species".equalsIgnoreCase(detail.getKey())) {
-                animal.setSpecies(detail.getValue());  // set species
-            } else if ("Breed".equalsIgnoreCase(detail.getKey())) {
+            if ("Breed".equalsIgnoreCase(detail.getKey())) {
                 animal.setBreed(detail.getValue());    // set breed
             }
         }
 
         ClassificationRecord record = new ClassificationRecord();
         record.setAnimal(animal);
-        record.setPhotoUrls(imageUrls);
+        record.setPhotoUrl(imageUrl);
 
         // map details
         List<ClassificationDetail> details = detailsFromAI.stream().map(dto -> {
