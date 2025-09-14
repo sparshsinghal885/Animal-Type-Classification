@@ -26,7 +26,7 @@ public class AIImageClassification {
     private String apiKey;
 
     @PostMapping
-    public ResponseEntity<List<ClassificationDetailDto>> getAnimalDetails(@RequestParam("images") MultipartFile image){
+    public ResponseEntity<List<ClassificationDetailDto>> getAnimalDetails(@RequestParam("image") MultipartFile image){
         String imageUrl;
         String path = "animal/extra";
         Map<String, Object> imageData = imageService.upload(image, path);

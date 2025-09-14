@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface AIService {
     public List<ClassificationDetailDto> classifyImage(String imageUrl, String apiKey);
+
+    public List<ClassificationDetailDto> getInfoFromGroq(String breed, String species);
 }
